@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+ <title>Próba Zginania</title>
+ <meta charset="utf-8">
+ <link rel="stylesheet" href="styles.css">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+ 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+ <div id="naglowek"> <h1>METODY DOŚWIADCZALNE W WYTRZYMAŁOŚCI MATERIAŁÓW </h1></div>
+ <div id="top-menu">
+     <a href="proba_rozciagania.html">Statyczna próba rozciągania</a>
+     <a href="proba_sciskania.html">Próba ściskania</a>
+     <a href="proba_skrecania.html">Próba skręcania</a>
+	 <a href="proba_zginania.html">Próba zginania</a>
+	  <a href="proba_scinania.html">Próba ścinania</a>
+ </div>
+ <h2>Próba zginania</h2>
+ <div id="input-form">
+		<div class="wyroznione">
+	<label for="ksztalt">Kształt przekroju próbki:</label>
+     <select id="ksztalt">
+         <option value="kolowy">Kołowy</option>
+         <option value="prostokatny">Prostokątny</option>
+     </select>
+	 </div>
+	 <div class="wyroznione">
+     <label for="material">Rodzaj stali:</label>
+     <select id="material">
+         <option value="St0s">Stal St0s</option>
+         <option value="St3s">Stal St3s</option>
+         <option value="St4s">Stal St4s</option>
+         <option value="St5">Stal St5s</option>
+         <option value="St6">Stal St6s</option>
+         <option value="St7">Stal St7s</option>
+         <option value="10">Stal 10</option>
+     </select>
+     </div>
+     <label for="obciazenie">Obciążenie (N):</label>
+     <input type="number" id="obciazenie" placeholder="np. 1000"><br>
+	 <div id="kolowyDims">
+         <label for="srednica">Średnica próbki (mm):</label>
+         <input type="number" id="srednica" placeholder="np. 200"><br>
+     </div>
+     <div id="prostokatnyDims" style="display:none;">
+         <label for="szerokosc">Szerokość (mm):</label>
+         <input type="number" id="szerokosc" placeholder="np. 50"><br>
+         <label for="wysokosc">Wysokość (mm):</label>
+         <input type="number" id="wysokosc" placeholder="np. 30"><br>
+     </div>
+     <label for="dlugosc">Długość Próbki (m):</label>
+     <input type="number" id="dlugosc" placeholder="np. 2"><br>
+     <label for="ugiecie">Maksymalne Ugięcie (mm):</label>
+     <input type="number" id="ugiecie" placeholder="np. 50"><br>
+     <button onclick="generujRaport()">Generuj raport</button>
+ </div>
+ <div id="raport">
+     <h2>Wyniki Analizy:</h2>
+     <p id="wynik"></p>
+	 <div class="wykres">
+		<canvas id="myChart" width="500" height="400"></canvas>
+		</div>
+ </div>
+ <script src="script_zginanie.js"></script>
+</body>
+</html>

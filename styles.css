@@ -1,0 +1,103 @@
+body {
+    font-family: 'Arial', sans-serif; /* Ustawia rodzaj czcionki dla całego dokumentu */
+    background-color: #f0f0f0; /* Ustawia kolor tła dla całego dokumentu */
+    margin: 0; /* Usuwa domyślny margines */
+    padding: 0; /* Usuwa domyślny padding */
+    display: flex; /* Ustawia flexbox dla lepszego układu elementów */
+    flex-direction: column; /* Ustawia kierunek flexbox na pionowy */
+    align-items: center; /* Wyśrodkowuje elementy poziomo w kontenerze flex */
+}
+#top-menu {
+    display: flex; /* Ustawia flexbox dla tego elementu */
+    justify-content: space-around; /* Rozkłada elementy równomiernie z przestrzenią wokół nich */
+}
+#top-menu a {
+    flex: 1; /* Każdy element linku zajmie równą przestrzeń */
+    text-align: center; /* Wyrównuje tekst do środka w każdym linku */
+    padding: 8px 10px; /* Ustawia wewnętrzny odstęp dla linków */
+    color: #fff; /* Ustawia kolor tekstu linków */
+    text-decoration: none; /* Usuwa podkreślenie z linków */
+    padding: 10px; /* Nadpisuje poprzedni padding, ustawiając nowy */
+    margin: 0 10px; /* Ustawia marginesy z lewej i prawej strony linków */
+    font-weight: bold; /* Ustawia tekst linków na pogrubiony */
+}
+#top-menu a:hover {
+    color: #778899; /* Zmienia kolor tekstu linku podczas najechania myszką */
+    border-bottom: 2px solid #fff; /* Dodaje białą linię pod tekstem linku */
+}
+#top-menu, #input-form, #raport, #naglowek {
+    width: 80%; /* Ustawia szerokość tych elementów na 80% ich kontenera */
+    max-width: 1000px; /* Ustawia maksymalną szerokość tych elementów */
+    margin-bottom: 20px; /* Ustawia odstęp na dole tych elementów */
+}
+h1, h2 {
+    color: #333; /* Ustawia kolor tekstu nagłówków */
+    text-align: center; /* Wyśrodkowuje tekst nagłówków */
+}
+#input-form, #raport {
+    background-color: #fff; /* Ustawia biały kolor tła dla tych elementów */
+    border-radius: 5px; /* Zaokrągla rogi tych elementów */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Dodaje cień do tych elementów */
+    padding: 20px; /* Ustawia wewnętrzny odstęp dla tych elementów */
+    margin: 20px; /* Ustawia zewnętrzny odstęp dookoła tych elementów */
+}
+select, input {
+    margin-bottom: 10px; /* Ustawia odstęp na dole każdego elementu */
+    padding: 8px; /* Ustawia wewnętrzny odstęp dla każdego elementu */
+    width: 100%; /* Ustawia szerokość każdego elementu na 100% kontenera */
+    box-sizing: border-box; /* Umożliwia włączenie paddingu i marginesu wewnętrznego do szerokości i wysokości */
+}
+button {
+    background-color: #4caf50; /* Ustawia kolor tła przycisku */
+    color: #fff; /* Ustawia kolor tekstu przycisku */
+    padding: 10px 15px; /* Ustawia wewnętrzny odstęp przycisku */
+    border: none; /* Usuwa obramowanie przycisku */
+    border-radius: 5px; /* Zaokrągla rogi przycisku */
+    cursor: pointer; /* Ustawia kursor na wskaźnik, gdy najedzie się na przycisk */
+}
+button:hover {
+    background-color: #45a049; /* Zmienia kolor tła przycisku podczas najechania myszką */
+}
+#top-menu {
+    background-color: #333; /* Ustawia kolor tła górnego menu */
+    padding: 10px; /* Ustawia wewnętrzny odstęp dla górnego menu */
+    text-align: center; /* Wyśrodkowuje tekst w górnym menu */
+}
+#wynik {
+    font-size: 1.2em; /* Zwiększa rozmiar czcionki dla wyników */
+}
+#raport h1 {
+    color: #003366; /* Ustawia kolor tekstu nagłówków w raporcie */
+    font-size: 1.5em; /* Zwiększa rozmiar czcionki nagłówków w raporcie */
+}
+#raport p {
+    font-size: 1.1em; /* Zwiększa rozmiar czcionki tekstu w raporcie */
+    line-height: 1.6; /* Ustawia wysokość linii tekstu w raporcie */
+    color: #333333; /* Ustawia kolor tekstu w raporcie */
+    margin: 2% 2% 2% 2%; /* Ustawia marginesy dookoła tekstu w raporcie */
+}
+.wyroznione {
+    background-color: #e6e6e6; /* Jasnoszare tło, pasujące do schematu kolorów */
+    border: 1px solid #ccc; /* Subtelna, jasna granica */
+    padding: 10px;
+    margin-bottom: 15px; /* Trochę większy margines na dole */
+    border-radius: 5px; /* Zaokrąglone rogi, spójne z resztą designu */
+}
+
+.wyroznione label {
+    font-weight: bold; /* Pogrubienie etykiety */
+    display: block; /* Etykieta jako blok, aby była nad elementem select */
+    margin-bottom: 5px; /* Margines na dole etykiety */
+}
+
+.wyroznione select {
+    width: calc(100% - 20px); /* Pełna szerokość z uwzględnieniem paddingu */
+    padding: 8px; /* Trochę więcej przestrzeni wewnątrz */
+    border-radius: 4px; /* Lekko zaokrąglone rogi */
+    border: 1px solid #ccc; /* Granica spójna z resztą formularza */
+}
+.wykres {
+	display: flex; /* Ustawia flexbox dla tego elementu */
+    justify-content: center; /* Wyśrodkowuje elementy wewnątrz kontenera flex w poziomie */
+    align-items: center; /* Wyśrodkowuje elementy wewnątrz kontenera flex w pionie */
+}
