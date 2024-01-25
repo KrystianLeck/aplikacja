@@ -371,3 +371,7 @@ function generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, przemies
 
 
 	
+
+
+
+	
