@@ -65,7 +65,7 @@ function generujRaport(wybranyKsztalt) {
     document.getElementById("wynik").innerHTML = wynik;
     const raportSection = document.getElementById("raport");
     raportSection.scrollIntoView({ behavior: "smooth" });
-	generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, ugiecie, wybranyKsztalt, wynik);
+	generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, ugiecie, wybranyKsztalt, material, wynik);
 }
 function obliczSt0s(obciazenie, dlugosc, srednica, ugiecie, ksztalt, szerokosc, wysokosc) {
     // Obliczenie naprężenia (MPa)
@@ -74,7 +74,7 @@ function obliczSt0s(obciazenie, dlugosc, srednica, ugiecie, ksztalt, szerokosc, 
     const reMin = 195; // Granica plastyczności
     const rmMin = 320; // Granica wytrzymałości
 	const srednicaM = srednica / 1000; // Konwersja średnicy na metry
-	const moment = obciazenie * dlugosc; // Moment zginający
+	const moment = obciazenie * (dlugosc/1000); // Moment zginający
 	let mom_bez;
 	let c ;
 	let naprezenie;
@@ -121,7 +121,7 @@ function obliczSt3s(obciazenie, dlugosc, srednica, ugiecie, ksztalt, szerokosc, 
     const reMin = 225; // Granica plastyczności
     const rmMin = 380; // Granica wytrzymałości
 	const srednicaM = srednica / 1000; // Konwersja średnicy na metry
-	const moment = obciazenie * dlugosc; // Moment zginający
+	const moment = obciazenie * (dlugosc/1000); // Moment zginający
 	let mom_bez;
 	let c ;
 	let naprezenie;
@@ -167,7 +167,7 @@ generujWykres(naprezenie, odksztalcenie, kg, reMin, rmMin);
     const reMin = 275; // Granica plastyczności
     const rmMin = 440; // Granica wytrzymałości
 const srednicaM = srednica / 1000; // Konwersja średnicy na metry
-	const moment = obciazenie * dlugosc; // Moment zginający
+	const moment = obciazenie * (dlugosc/1000); // Moment zginający
 	let mom_bez;
 	let c ;
 	let naprezenie;
@@ -213,7 +213,7 @@ generujWykres(naprezenie, odksztalcenie, kg, reMin, rmMin);
     const reMin = 295; // Granica plastyczności
     const rmMin = 490; // Granica wytrzymałości
 	const srednicaM = srednica / 1000; // Konwersja średnicy na metry
-	const moment = obciazenie * dlugosc; // Moment zginający
+	const moment = obciazenie * (dlugosc/1000); // Moment zginający
 	let mom_bez;
 	let c ;
 	let naprezenie;
@@ -259,7 +259,7 @@ generujWykres(naprezenie, odksztalcenie, kg, reMin, rmMin);
     const reMin = 335; // Granica plastyczności
     const rmMin = 590; // Granica wytrzymałości
 	const srednicaM = srednica / 1000; // Konwersja średnicy na metry
-	const moment = obciazenie * dlugosc; // Moment zginający
+	const moment = obciazenie * (dlugosc/1000); // Moment zginający
 	let mom_bez;
 	let c ;
 	let naprezenie;
@@ -304,7 +304,7 @@ generujWykres(naprezenie, odksztalcenie, kg, reMin, rmMin);
     const reMin = 365; // Granica plastyczności
     const rmMin = 690; // Granica wytrzymałości
 const srednicaM = srednica / 1000; // Konwersja średnicy na metry
-	const moment = obciazenie * dlugosc; // Moment zginający
+	const moment = obciazenie * (dlugosc/1000); // Moment zginający
 	let mom_bez;
 	let c ;
 	let naprezenie;
@@ -349,7 +349,7 @@ generujWykres(naprezenie, odksztalcenie, kg, reMin, rmMin);
     const reMin = 205; // Granica plastyczności
     const rmMin = 335; // Granica wytrzymałości
 const srednicaM = srednica / 1000; // Konwersja średnicy na metry
-	const moment = obciazenie * dlugosc; // Moment zginający
+	const moment = obciazenie * (dlugosc/1000); // Moment zginający
 	let mom_bez;
 	let c ;
 	let naprezenie;
@@ -394,7 +394,7 @@ generujWykres(naprezenie, odksztalcenie, kg, reMin, rmMin);
     new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['0%', 'Naprężenie dopusczalne', 'Re Min', 'Rm Min', 'Zerwanie'],
+            labels: ['0%', 'Naprężenie dopuszczalne', 'Re Min', 'Rm Min', 'Zerwanie'],
             datasets: [{
                 label: 'Naprężenie (MPa)',
                 data: [0, kg, reMin, rmMin, naprezeniePoRmMin],
@@ -448,16 +448,14 @@ function usunPolskieZnaki(tekst) {
                 .replace(/Ś/g, 'S').replace(/Ż/g, 'Z')
                 .replace(/Ź/g, 'Z');
 }  
-function generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, ugiecie, wybranyKsztalt, wynik) {
+function generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, ugiecie, wybranyKsztalt, material, wynik) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    doc.addFont('Arial', 'normal', 'unicode');
-    doc.setFont('Arial');
     const tytul = `Proba zginania`;
     const danewejsciowe = `Dane wejsciowe:`;
 	const danewyjsciowe = `Dane wyjsciowe:`;	
     const ob = `Obciazenie: ${obciazenie}N`;
-    const dp = `Dlugosc poczatkowa: ${dlugosc}m`;
+    const dp = `Dlugosc poczatkowa: ${dlugosc}mm`;
     const u = `Maksymalne ugiecie: ${ugiecie}mm`;
     doc.text(tytul, 10, 10);
     doc.text(danewejsciowe, 10, 20);
@@ -486,5 +484,14 @@ function generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, ugiecie,
 	const podzielonyTekst = doc.splitTextToSize(linieTekstu, 180);
 		doc.text(podzielonyTekst, 10, 100);
         }
-    doc.save('raport.pdf');
+    setTimeout(function() {
+        var canvas = document.getElementById('myChart');
+        var chartImageBase64 = canvas.toDataURL('image/png');
+		const wykres = `Wykres ukazujacy wartosci graniczne naprezenia dla stali ${material}`;
+		doc.text(wykres, 10, 150);
+        doc.addImage(chartImageBase64, 'PNG', 10, 160, 125, 100); // 
+
+        doc.save('raport.pdf');
+    }, 1000); 
+
 }
