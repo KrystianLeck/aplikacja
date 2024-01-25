@@ -79,7 +79,7 @@ function obliczSt0s(obciazenie, dlugosc, srednica, kat, ksztalt, szerokosc, wyso
 	   let c;
 	   wynik += `<h1>Próba skręcania</h1>\n`;
 	const katRad = kat * (Math.PI / 180); // Konwersja kąta na radiany
-    const moment = obciazenie * dlugosc; // Moment skręcający w Nm
+       const moment = obciazenie * (dlugosc/1000); // Moment skręcający w Nm
 	 if (ksztalt === "kolowy") {
         const srednicaM = srednica / 1000; // Konwersja średnicy na metry
         mom_bez = (Math.PI * Math.pow(srednicaM, 4) / 32).toFixed(10); // Moment bezwładności polarny dla przekroju kołowego
@@ -114,7 +114,7 @@ function obliczSt3s(obciazenie, dlugosc, srednica, kat, ksztalt, szerokosc, wyso
 	   let c;
   wynik += `<h1>Próba skręcania</h1>\n`;
 	const katRad = kat * (Math.PI / 180); // Konwersja kąta na radiany
-    const moment = obciazenie * dlugosc; // Moment skręcający w Nm
+      const moment = obciazenie * (dlugosc/1000); // Moment skręcający w Nm
 	 if (ksztalt === "kolowy") {
         const srednicaM = srednica / 1000; // Konwersja średnicy na metry
         mom_bez = (Math.PI * Math.pow(srednicaM, 4) / 32).toFixed(10); // Moment bezwładności polarny dla przekroju kołowego
@@ -149,7 +149,7 @@ let wynik = '';
 	   let c;
 	     wynik += `<h1>Próba skręcania</h1>\n`;
 	const katRad = kat * (Math.PI / 180); // Konwersja kąta na radiany
-    const moment = obciazenie * dlugosc; // Moment skręcający w Nm
+       const moment = obciazenie * (dlugosc/1000); // Moment skręcający w Nm
 	 if (ksztalt === "kolowy") {
         const srednicaM = srednica / 1000; // Konwersja średnicy na metry
         mom_bez = (Math.PI * Math.pow(srednicaM, 4) / 32).toFixed(10); // Moment bezwładności polarny dla przekroju kołowego
@@ -185,7 +185,7 @@ function obliczSt5(obciazenie, dlugosc, srednica, kat, ksztalt, szerokosc, wysok
 	   let c;
 	     wynik += `<h1>Próba skręcania</h1>\n`;
 	const katRad = kat * (Math.PI / 180); // Konwersja kąta na radiany
-    const moment = obciazenie * dlugosc; // Moment skręcający w Nm
+      const moment = obciazenie * (dlugosc/1000); // Moment skręcający w Nm
 	 if (ksztalt === "kolowy") {
         const srednicaM = srednica / 1000; // Konwersja średnicy na metry
         mom_bez = (Math.PI * Math.pow(srednicaM, 4) / 32).toFixed(10); // Moment bezwładności polarny dla przekroju kołowego
@@ -221,7 +221,7 @@ function obliczSt6(obciazenie, dlugosc, srednica, kat, ksztalt, szerokosc, wysok
 	   let c;
 	     wynik += `<h1>Próba skręcania</h1>\n`;
 	const katRad = kat * (Math.PI / 180); // Konwersja kąta na radiany
-    const moment = obciazenie * dlugosc; // Moment skręcający w Nm
+       const moment = obciazenie * (dlugosc/1000); // Moment skręcający w Nm
 	 if (ksztalt === "kolowy") {
         const srednicaM = srednica / 1000; // Konwersja średnicy na metry
         mom_bez = (Math.PI * Math.pow(srednicaM, 4) / 32).toFixed(10); // Moment bezwładności polarny dla przekroju kołowego
@@ -256,7 +256,7 @@ function obliczSt7(obciazenie, dlugosc, srednica, kat, ksztalt, szerokosc, wysok
 	   let c;
 	     wynik += `<h1>Próba skręcania</h1>\n`;
 	const katRad = kat * (Math.PI / 180); // Konwersja kąta na radiany
-    const moment = obciazenie * dlugosc; // Moment skręcający w Nm
+     const moment = obciazenie * (dlugosc/1000); // Moment skręcający w Nm
 	 if (ksztalt === "kolowy") {
         const srednicaM = srednica / 1000; // Konwersja średnicy na metry
         mom_bez = (Math.PI * Math.pow(srednicaM, 4) / 32).toFixed(10); // Moment bezwładności polarny dla przekroju kołowego
@@ -291,7 +291,7 @@ function oblicz10(obciazenie, dlugosc, srednica, kat, ksztalt, szerokosc, wysoko
 	   let c;
 	     wynik += `<h1>Próba skręcania</h1>\n`;
 	const katRad = kat * (Math.PI / 180); // Konwersja kąta na radiany
-    const moment = obciazenie * dlugosc; // Moment skręcający w Nm
+    const moment = obciazenie * (dlugosc*1000); // Moment skręcający w Nm
 	 if (ksztalt === "kolowy") {
         const srednicaM = srednica / 1000; // Konwersja średnicy na metry
         mom_bez = (Math.PI * Math.pow(srednicaM, 4) / 32).toFixed(10); // Moment bezwładności polarny dla przekroju kołowego
@@ -333,13 +333,11 @@ function usunPolskieZnaki(tekst) {
 function generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, kat, wybranyKsztalt, wynik) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    doc.addFont('Arial', 'normal', 'unicode');
-    doc.setFont('Arial');
     const tytul = `Statyczna proba rozciagania`;
     const danewejsciowe = `Dane wejsciowe:`;
 	const danewyjsciowe = `Dane wyjsciowe:`;	
     const ob = `Obciazenie: ${obciazenie}N`;
-    const dp = `Dlugosc poczatkowa: ${dlugosc}m`;
+    const dp = `Dlugosc poczatkowa: ${dlugosc}mm`;
     const k = `Kat: ${kat}stopni`;
     doc.text(tytul, 10, 10);
     doc.text(danewejsciowe, 10, 20);
@@ -372,4 +370,5 @@ doc.text(podzielonyTekst, 10, 100);
         }
     doc.save('raport.pdf');
 }
+
 
