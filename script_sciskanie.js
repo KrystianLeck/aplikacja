@@ -76,7 +76,7 @@ function generujRaport(wybranyKsztalt ) {
     document.getElementById("wynik").innerHTML = wynik;
 	const raportSection = document.getElementById("raport");
     raportSection.scrollIntoView({ behavior: "smooth" });
-	generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, dlugosck, wybranyKsztalt, wynik);
+	generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, dlugosck, wybranyKsztalt, material, wynik);
 }
 function obliczSt0s(obciazenie, dlugosck, dlugosc, przekroj) {
     // Obliczenie naprężenia (MPa)
@@ -101,7 +101,7 @@ function obliczSt0s(obciazenie, dlugosck, dlugosc, przekroj) {
 	} else {
         wynik += `<b>Naprężenie ściskające</b> wynosi: ${naprezenie_pr.toFixed(2)} MPa więc przekroczyło granicę wytrzymałości na ściskanie, materiał ulegnie zerwaniu. W przypadku próby ściskania, materiał może pęknąć lub ulec innym formom katastrofalnego uszkodzenia.\n`;
     }
-	generujWykres(naprezenie_pr, odksztalcenie);
+	generujWykres(naprezenie_pr, odksztalcenie, kr, reMin, rmMin);
     return wynik;
 }
 function obliczSt3s(obciazenie, dlugosck, dlugosc, przekroj) {
@@ -315,17 +315,16 @@ function generujWykres(naprezenie_pr, odksztalcenie, kr, reMin, rmMin) {
                 .replace(/Ś/g, 'S').replace(/Ż/g, 'Z')
                 .replace(/Ź/g, 'Z');
 }  
-function generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, dlugosck, wybranyKsztalt, wynik) {
+function generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, dlugosck, wybranyKsztalt, material, wynik) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    doc.addFont('Arial', 'normal', 'unicode');
-    doc.setFont('Arial');
-    const tytul = `Proba statyczna rozciagania`;
+
+    const tytul = `Proba sciskania`;
     const danewejsciowe = `Dane wejsciowe:`;
 	const danewyjsciowe = `Dane wyjsciowe:`;	
     const ob = `Obciazenie: ${obciazenie}N`;
-    const dp = `Dlugosc poczatkowa: ${dlugosc}m`;
-    const dk = `Dlugosc koncowa: ${dlugosck}m`;
+    const dp = `Dlugosc poczatkowa: ${dlugosc}mm`;
+    const dk = `Dlugosc koncowa: ${dlugosck}mm`;
     doc.text(tytul, 10, 10);
     doc.text(danewejsciowe, 10, 20);
     doc.text(ob, 10, 30);
@@ -353,6 +352,17 @@ const wynikCzystyTekst = usunPolskieZnaki(wynik.replace(/<[^>]*>?/gm, ''));
 	const podzielonyTekst = doc.splitTextToSize(linieTekstu, 180);
 doc.text(podzielonyTekst, 10, 100);
         }
-    doc.save('raport.pdf');
+    setTimeout(function() {
+        var canvas = document.getElementById('myChart');
+        var chartImageBase64 = canvas.toDataURL('image/png');
+		const wykres = `Wykres ukazujacy wartosci graniczne naprezenia dla stali ${material}`;
+		doc.text(wykres, 10, 150);
+        doc.addImage(chartImageBase64, 'PNG', 10, 160, 125, 100); // 
+
+        doc.save('raport.pdf');
+    }, 1000); 
+
 }
+
+
 
