@@ -76,11 +76,11 @@ let wynik = '';
     document.getElementById("wynik").innerHTML = wynik;
 	const raportSection = document.getElementById("raport");
     raportSection.scrollIntoView({ behavior: "smooth" });
-	generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, przemieszczenie, wybranyKsztalt, wynik);
+	generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, przemieszczenie, wybranyKsztalt, material, wynik);
 }
 function obliczSt0s(obciazenie, przemieszczenie, dlugosc, przekroj, odksztalcenie){
     let wynik = '';
-	const moment = obciazenie * dlugosc; // Moment ścinający
+	const moment = obciazenie * (dlugosc/1000); // Moment ścinający
 	const naprezenie = (obciazenie/ przekroj)/1000000;
 	const modul= naprezenie / odksztalcenie;
 	const ks = 65; // Dopuszczalne naprężenie
@@ -106,7 +106,7 @@ generujWykres(naprezenie, odksztalcenie, ks, reMin, rmMin);
 }
 function obliczSt3s(obciazenie, przemieszczenie, dlugosc, przekroj, odksztalcenie){
     let wynik = '';
-	const moment = obciazenie * dlugosc; // Moment ścinający
+	const moment = obciazenie * (dlugosc/1000); // Moment ścinający
 	const naprezenie = (obciazenie / przekroj)/1000000;
 	const modul= naprezenie / odksztalcenie;
 	const ks = 75; // Dopuszczalne naprężenie
@@ -132,7 +132,7 @@ generujWykres(naprezenie, odksztalcenie, ks, reMin, rmMin);
 }
 function obliczSt4s(obciazenie, przemieszczenie, dlugosc, przekroj, odksztalcenie){
     let wynik = '';
-	const moment = obciazenie * dlugosc; // Moment ścinający
+	const moment = obciazenie * (dlugosc/1000); // Moment ścinający
 	const naprezenie = (obciazenie / przekroj)/1000000;
 	const modul= naprezenie / odksztalcenie;
 	const ks = 85; // Dopuszczalne naprężenie
@@ -158,7 +158,7 @@ generujWykres(naprezenie, odksztalcenie, ks, reMin, rmMin);
 }
 function obliczSt5(obciazenie, przemieszczenie, dlugosc, przekroj, odksztalcenie){
     let wynik = '';
-	const moment = obciazenie * dlugosc; // Moment ścinający
+	const moment = obciazenie * (dlugosc/1000); // Moment ścinający
 	const naprezenie = (obciazenie / przekroj)/1000000;
 	const modul= naprezenie / odksztalcenie;
 	const ks = 90; // Dopuszczalne naprężenie
@@ -184,7 +184,7 @@ generujWykres(naprezenie, odksztalcenie, ks, reMin, rmMin);
 }
 function obliczSt6(obciazenie, przemieszczenie, dlugosc, przekroj, odksztalcenie){
     let wynik = '';
-	const moment = obciazenie * dlugosc; // Moment ścinający
+	const moment = obciazenie * (dlugosc/1000); // Moment ścinający
 	const naprezenie = (obciazenie / przekroj)/1000000;
 	const modul= naprezenie / odksztalcenie;
 	const ks = 105; // Dopuszczalne naprężenie
@@ -210,7 +210,7 @@ generujWykres(naprezenie, odksztalcenie, ks, reMin, rmMin);
 }
 function obliczSt7(obciazenie, przemieszczenie, dlugosc, przekroj, odksztalcenie){
     let wynik = '';
-	const moment = obciazenie * dlugosc; // Moment ścinający
+	const moment = obciazenie * (dlugosc/1000); // Moment ścinający
 	const naprezenie = (obciazenie / przekroj)/1000000;
 	const modul= naprezenie / odksztalcenie;
 	const ks = 115; // Dopuszczalne naprężenie
@@ -236,7 +236,7 @@ generujWykres(naprezenie, odksztalcenie, ks, reMin, rmMin);
 }
 function obliczSt10(obciazenie, przemieszczenie, dlugosc, przekroj, odksztalcenie){
     let wynik = '';
-	const moment = obciazenie * dlugosc; // Moment ścinający
+	const moment = obciazenie * (dlugosc/1000); // Moment ścinający
 	const naprezenie = (obciazenie / przekroj)/1000000;
 	const modul= naprezenie / odksztalcenie;
 	const ks = 65; // Dopuszczalne naprężenie
@@ -266,7 +266,7 @@ generujWykres(naprezenie, odksztalcenie, ks, reMin, rmMin);
     new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['0%', 'Naprężenie dopusczalne', 'Re Min', 'Rm Min', 'Zerwanie'],
+            labels: ['0%', 'Naprężenie dopuszczalne', 'Re Min', 'Rm Min', 'Zerwanie'],
             datasets: [{
                 label: 'Naprężenie (MPa)',
                 data: [0, ks, reMin, rmMin, naprezeniePoRmMin],
@@ -320,16 +320,14 @@ function usunPolskieZnaki(tekst) {
                 .replace(/Ś/g, 'S').replace(/Ż/g, 'Z')
                 .replace(/Ź/g, 'Z');
 }  
-function generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, przemieszczenie, wybranyKsztalt, wynik) {
+function generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, przemieszczenie, wybranyKsztalt, material, wynik) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    doc.addFont('Arial', 'normal', 'unicode');
-    doc.setFont('Arial');
-    const tytul = `Proba zginania`;
+    const tytul = `Proba scinania`;
     const danewejsciowe = `Dane wejsciowe:`;
 	const danewyjsciowe = `Dane wyjsciowe:`;	
     const ob = `Obciazenie: ${obciazenie}N`;
-    const dp = `Dlugosc poczatkowa: ${dlugosc}m`;
+    const dp = `Dlugosc poczatkowa: ${dlugosc}mm`;
     const p = `Przemieszczenie poprzeczne: ${przemieszczenie}mm`;
     doc.text(tytul, 10, 10);
     doc.text(danewejsciowe, 10, 20);
@@ -358,5 +356,18 @@ function generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, przemies
 	const podzielonyTekst = doc.splitTextToSize(linieTekstu, 180);
 		doc.text(podzielonyTekst, 10, 100);
         }
-    doc.save('raport.pdf');
+    setTimeout(function() {
+        var canvas = document.getElementById('myChart');
+        var chartImageBase64 = canvas.toDataURL('image/png');
+		const wykres = `Wykres ukazujacy wartosci graniczne naprezenia dla stali ${material}`;
+		doc.text(wykres, 10, 150);
+        doc.addImage(chartImageBase64, 'PNG', 10, 160, 125, 100); // 
+
+        doc.save('raport.pdf');
+    }, 1000); 
+
 }
+
+
+
+	
