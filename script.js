@@ -76,7 +76,7 @@ function generujRaport(wybranyKsztalt) {
     document.getElementById("wynik").innerHTML = wynik;
 	const raportSection = document.getElementById("raport");
     raportSection.scrollIntoView({ behavior: "smooth" });
-	generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, dlugosck, wybranyKsztalt, wynik);
+	generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, dlugosck, wybranyKsztalt, material, wynik);
 }
 function obliczSt0s(obciazenie, dlugosck, dlugosc, przekroj) {
     let wynik = '';
@@ -86,7 +86,7 @@ function obliczSt0s(obciazenie, dlugosck, dlugosc, przekroj) {
 	const kr = 100; 
     const reMin = 195; 
     const rmMin = 320; 
-	wynik += `<h1>Próba statyczna rozciągania </h1>\n`;
+	wynik += `<h1>Statyczna próba rozciągania</h1>\n`;
     if (naprezenie_pr < kr) {
 		 
 		wynik += `<b>Naprężenie rozciągające</b> wynosi: ${naprezenie_pr.toFixed(2)} MPa<br> \n`;
@@ -113,7 +113,7 @@ function obliczSt3s(obciazenie, dlugosck, dlugosc, przekroj) {
 	const kr = 120; // Dopuszczalne naprężenie
     const reMin = 235; // Granica plastyczności
     const rmMin = 380; // Granica wytrzymałości
-		wynik += `<h1>Próba statyczna rozciągania </h1>\n`;
+		wynik += `<h1>Statyczna próba rozciągania</h1>\n`;
     if (naprezenie_pr < kr) {
        
 		wynik += `<b>Naprężenie rozciągające</b> wynosi: ${naprezenie_pr.toFixed(2)} MPa<br> \n`;
@@ -140,7 +140,7 @@ generujWykres(naprezenie_pr, odksztalcenie, kr, reMin, rmMin);
 	 const kr = 130; // Dopuszczalne naprężenie
     const reMin = 275; // Granica plastyczności
     const rmMin = 440; // Granica wytrzymałości
-		wynik += `<h1>Próba statyczna rozciągania </h1>\n`;
+		wynik += `<h1>Statyczna próba rozciągania</h1>\n`;
     if (naprezenie_pr <kr) {
       		wynik += `<b>Naprężenie rozciągające</b> wynosi: ${naprezenie_pr.toFixed(2)} MPa<br> \n`;
         wynik += `<b>Odkształcenie materiału</b> wynosi: ${odksztalcenie.toFixed(2)} <br>\n`;
@@ -166,7 +166,7 @@ generujWykres(naprezenie_pr, odksztalcenie, kr, reMin, rmMin);
 	const kr = 145; // Dopuszczalne naprężenie
     const reMin = 295; // Granica plastyczności
     const rmMin = 490; // Granica wytrzymałości
-		wynik += `<h1>Próba statyczna rozciągania </h1>\n`;
+		wynik += `<h1>Statyczna próba rozciągania</h1>\n`;
     if (naprezenie_pr <kr) {
 		wynik += `<b>Naprężenie rozciągające</b> wynosi: ${naprezenie_pr.toFixed(2)} MPa<br> \n`;
         wynik += `<b>Odkształcenie materiału</b> wynosi: ${odksztalcenie.toFixed(2)} <br>\n`;
@@ -192,13 +192,13 @@ generujWykres(naprezenie_pr, odksztalcenie, kr, reMin, rmMin);
 	const kr = 160; // Dopuszczalne naprężenie
     const reMin = 335; // Granica plastyczności
     const rmMin = 590; // Granica wytrzymałości
-	 	wynik += `<h1>Próba statyczna rozciągania </h1>\n`;
+	 	wynik += `<h1>Statyczna próba rozciągania </h1>\n`;
     if (naprezenie_pr < kr) {
 		wynik += `<b>Naprężenie rozciągające</b> wynosi: ${naprezenie_pr.toFixed(2)} MPa<br> \n`;
         wynik += `<b>Odkształcenie materiału</b> wynosi: ${odksztalcenie.toFixed(2)} <br>\n`;
         wynik += `<b>Moduł Younga</b> wynosi: ${modul.toFixed(2)} Mpa <br>\n`;
     } else if (naprezenie_pr >= kr && naprezenie_pr <reMin) {
-        wynik += `<b>Naprężenie rozciągające</b> wynosi: ${nprezenie_pr.toFixed(2)} MPa więc przekroczyło wartość naprężenia, przy której materiał przechodzi w stan plastyczny a odkształcenie staje się nieodwracalne. Materiał zaczyna ulegać trwałemu odkształceniu, które nie zniknie po usunięciu obciążenia.<br>\n`;
+        wynik += `<b>Naprężenie rozciągające</b> wynosi: ${naprezenie_pr.toFixed(2)} MPa więc przekroczyło wartość naprężenia, przy której materiał przechodzi w stan plastyczny a odkształcenie staje się nieodwracalne. Materiał zaczyna ulegać trwałemu odkształceniu, które nie zniknie po usunięciu obciążenia.<br>\n`;
 		wynik += `<b>Odkształcenie materiału</b> wynosi: ${odksztalcenie.toFixed(2)} <br>\n`;
     } else if (naprezenie_pr >= reMin && naprezenie_pr <rmMin ) {
         wynik += `<b>Naprężenie rozciągające</b> wynosi: ${naprezenie_pr.toFixed(2)} MPa więc przekroczyło minimalną granicę plastyczności stali. Gdy stal przekroczy tę wartość, zaczyna płynąć, a odkształcenie staje się trwałe i nieodwracalne. W tym punkcie, materiał zaczyna płynąć, co oznacza, że odkształcenie jest trwałe, nawet po usunięciu obciążenia.<br>\n`;
@@ -219,7 +219,7 @@ generujWykres(naprezenie_pr, odksztalcenie, kr, reMin, rmMin);
 	const kr = 175; // Dopuszczalne naprężenie
     const reMin = 365; // Granica plastyczności
     const rmMin = 690; // Granica wytrzymałości
-	 	wynik += `<h1>Próba statyczna rozciągania </h1>\n`;
+	 	wynik += `<h1>Statyczna próba rozciągania</h1>\n`;
     if (naprezenie_pr < kr) {
 		wynik += `<b>Naprężenie rozciągające</b> wynosi: ${naprezenie_pr.toFixed(2)} MPa<br> \n`;
         wynik += `<b>Odkształcenie materiału</b> wynosi: ${odksztalcenie.toFixed(2)} <br>\n`;
@@ -246,7 +246,7 @@ generujWykres(naprezenie_pr, odksztalcenie, kr, reMin, rmMin);
 	const kr = 105; // Dopuszczalne naprężenie
     const reMin = 205; // Granica plastyczności
     const rmMin = 335; // Granica wytrzymałości
-	 	wynik += `<h1>Próba statyczna rozciągania </h1>\n`;
+	 	wynik += `<h1>Statyczna próba rozciągania</h1>\n`;
     if (naprezenie_pr < kr) {
 		wynik += `<b>Naprężenie rozciągające</b> wynosi: ${naprezenie_pr.toFixed(2)} MPa<br> \n`;
         wynik += `<b>Odkształcenie materiału</b> wynosi: ${odksztalcenie.toFixed(2)} <br>\n`;
@@ -270,7 +270,7 @@ function generujWykres(naprezenie_pr, odksztalcenie, kr, reMin, rmMin) {
     new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['0%', 'Naprężenie dopusczalne', 'Re Min', 'Rm Min', 'Zerwanie'],
+            labels: ['0%', 'Naprężenie dopuszczalne', 'Re Min', 'Rm Min', 'Zerwanie'],
             datasets: [{
                 label: 'Naprężenie (MPa)',
                 data: [0, kr, reMin, rmMin, naprezeniePoRmMin],
@@ -312,6 +312,7 @@ function generujWykres(naprezenie_pr, odksztalcenie, kr, reMin, rmMin) {
         }
     });
 }
+
 	function usunPolskieZnaki(tekst) {
     return tekst.replace(/ą/g, 'a').replace(/ć/g, 'c')
                 .replace(/ę/g, 'e').replace(/ł/g, 'l')
@@ -324,17 +325,16 @@ function generujWykres(naprezenie_pr, odksztalcenie, kr, reMin, rmMin) {
                 .replace(/Ś/g, 'S').replace(/Ż/g, 'Z')
                 .replace(/Ź/g, 'Z');
 }  
-function generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, dlugosck, wybranyKsztalt, wynik) {
+function generujPDF(obciazenie, srednica, szerokosc, wysokosc, dlugosc, dlugosck, wybranyKsztalt, material, wynik) {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    doc.addFont('Arial', 'normal', 'unicode');
-    doc.setFont('Arial');
-    const tytul = `Proba statyczna rozciagania`;
+   
+    const tytul = `Statyczna proba rozciagania`;
     const danewejsciowe = `Dane wejsciowe:`;
 	const danewyjsciowe = `Dane wyjsciowe:`;	
     const ob = `Obciazenie: ${obciazenie}N`;
-    const dp = `Dlugosc poczatkowa: ${dlugosc}m`;
-    const dk = `Dlugosc koncowa: ${dlugosck}m`;
+    const dp = `Dlugosc poczatkowa: ${dlugosc}mm`;
+    const dk = `Dlugosc koncowa: ${dlugosck}mm`;
     doc.text(tytul, 10, 10);
     doc.text(danewejsciowe, 10, 20);
     doc.text(ob, 10, 30);
@@ -362,6 +362,15 @@ const wynikCzystyTekst = usunPolskieZnaki(wynik.replace(/<[^>]*>?/gm, ''));
 	const podzielonyTekst = doc.splitTextToSize(linieTekstu, 180);
 doc.text(podzielonyTekst, 10, 100);
         }
-    doc.save('raport.pdf');
+		setTimeout(function() {
+        var canvas = document.getElementById('myChart');
+        var chartImageBase64 = canvas.toDataURL('image/png');
+		const wykres = `Wykres ukazujacy wartosci graniczne naprezenia dla stali ${material}:`;
+		doc.text(wykres, 10, 150);
+        doc.addImage(chartImageBase64, 'PNG', 10, 160, 125, 100); // 
+		
+        doc.save('raport.pdf');
+    }, 1000); 
+
 }
 
